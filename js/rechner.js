@@ -2,10 +2,11 @@
 
 function Model() {
     var self = this,
-        rate;   //Date: 10.04.2021
+        rate;
     let chf;
     self.observable = new Observable();
 
+//HTTP request aufsetzen
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "text.txt", true);
     xhttp.onreadystatechange = function() {
