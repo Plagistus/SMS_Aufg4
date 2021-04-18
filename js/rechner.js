@@ -49,7 +49,7 @@ function Model() {
         var dollar = chf * CHFUSD;
 
         var euro = dollar * rateUSDEUR;
-        euro.toFixed(2);
+        euro = euro.toFixed(2);
         self.observable.notifyObservers(euro);
     }
 
