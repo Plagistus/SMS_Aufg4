@@ -9,6 +9,8 @@ function Model() {
 
     self.observable = new Observable();
 
+
+
     function getCurrencyFactor() {
         var xhttp = new XMLHttpRequest();
         var url = "http://api.currencylayer.com/live?access_key=936ee4281f2f36b5f7658bb477a66675&format=1";
@@ -16,31 +18,37 @@ function Model() {
         xhttp.addEventListener("load", transferComplete, false);
         xhttp.addEventListener("error", transferFailed, false);
         xhttp.send(null);
+
+        /*
+ //HTTP request aufsetzen
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "text.txt", true);
+        xhttp.addEventListener("load", transferComplete, false);
+        xhttp.addEventListener("error", transferFailed, false);
+ */
     }
+
 
     function transferComplete() {
         rateUSDEUR = JSON.parse(this.responseText).quotes.USDEUR;
         rateUSDCHF = JSON.parse(this.responseText).quotes.USDCHF;
         getEUR();
+
+        /*xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                this.responseText;
+                rate = xhttp.responseText;
+                console.log("Rate: "+rate);
+                getEUR();
+            }
+        };
+        xhttp.send();*/
     }
 
     function transferFailed(data) {
         console.log("Error: " + data);
     }
 
-    /*HTTP request aufsetzen
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "text.txt", true);
-        xhttp.onreadystatechange = function() {
-            if (this.readyState === 4 && this.status === 200) {
-                this.responseText;
-                rate = xhttp.responseText;
-                console.log("Rate: "+rate);
-                getEUR()
-            }
-        };
-        xhttp.send();
-    */
 
     //-----------------------------------//
 
@@ -55,6 +63,7 @@ function Model() {
 
     self.setCHF = function(amount) {
         chf = amount;
+        //getEUR();
         getCurrencyFactor();
     };
 
